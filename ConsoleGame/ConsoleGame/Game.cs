@@ -25,7 +25,7 @@ namespace ConsoleGame
                 //drawmap
                 //enemy actions
                 //drawmap
-
+                Console.ReadKey();
             } while (gameInProgress);
         }
 
@@ -36,7 +36,21 @@ namespace ConsoleGame
                 for (int x = 0; x < map.Width; x++)
                 {
                     Cell cell = map.GetCell(y,x);
-                    Console.Write(cell.Symbol);
+                    //Console.ForegroundColor = cell?.Color ?? ConsoleColor.White;
+                    //Console.Write(cell.Symbol);
+                    IDrawable drawable = cell;
+
+                    foreach (var creature in map.Creatures)
+                    {
+                        if (creature.Cell == cell)
+                        {
+                            drawable = creature;
+                            break;
+                        }
+                    }
+
+                    Console.ForegroundColor = drawable?.Color ?? ConsoleColor.White;
+                    Console.Write(drawable?.Symbol);
                 }
                 Console.WriteLine();
             }
@@ -46,7 +60,9 @@ namespace ConsoleGame
         {
             //ToDo: Read from config later
             map = new Map(width: 10, height: 10);
-            hero = new Hero();
+            var heroCell = map.GetCell(0, 0);
+            hero = new Hero(heroCell);
+            map.Creatures.Add(hero);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleGame
 {
@@ -8,7 +9,7 @@ namespace ConsoleGame
         public int Height { get; }
 
         private readonly Cell[,] cells;
-
+        public List<Creatures> Creatures { get; set; } = new List<Creatures>();
         public Map(int width, int height)
         {
             Width = width;
@@ -24,7 +25,6 @@ namespace ConsoleGame
                 }
             }
         }
-
         internal Cell GetCell(int y, int x) => cells[y, x];
         //{
         //    return cells[y,x];

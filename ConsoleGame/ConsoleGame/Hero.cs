@@ -1,9 +1,12 @@
-﻿namespace ConsoleGame
+﻿using System;
+
+namespace ConsoleGame
 {
-    internal class Hero
+    internal class Hero : Creatures
     {
-        public Hero()
+        public Hero(Cell cell) : base(cell, "H ")
         {
+            Color = ConsoleColor.Yellow;
         }
     }
 }
